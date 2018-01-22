@@ -11,6 +11,7 @@ import UIKit
 class PeopleViewController: UIViewController {
     
     static let cellId = "CellId"
+    static let headerId = "HeaderId"
 
     var people: [People] = [] {
         didSet {
@@ -33,7 +34,12 @@ class PeopleViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: PeopleTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PeopleViewController.cellId)
-
+        tableView.register(UINib(nibName: PeopleHeaderSection.nibName, bundle: nil), forCellReuseIdentifier: PeopleViewController.headerId)
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 140
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionHeaderHeight = 140
+        
         getPeople()
     }
     
@@ -69,23 +75,54 @@ class PeopleViewController: UIViewController {
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
 extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return people.count
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return people[section].films?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PeopleViewController.cellId, for: indexPath) as! PeopleTableViewCell
         
-        let person = people[indexPath.row]
-        cell.configure(withName: person.name, gender: person.gender, height: person.height)
+        
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 96
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableCell(withIdentifier: PeopleViewController.headerId) as? PeopleHeaderSection else {
+            return nil
+        }
+        
+        let person = people[section]
+        
+        header.configure(withName: person.name, gender: person.gender, height: person.height)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose(_:)))
+        header.addGestureRecognizer(tapGesture)
+        
+        return header
     }
+    
+    @objc func handleExpandClose(_ gesture: UITapGestureRecognizer) {
+        
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -12,6 +12,7 @@ struct People: Decodable {
     let name: String?
     let height: String?
     let gender: String?
+    let films: [String]?
 }
 
 struct Result: Decodable {

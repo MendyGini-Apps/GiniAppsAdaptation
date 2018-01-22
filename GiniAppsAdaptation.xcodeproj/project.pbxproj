@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B1F328D2015F004001933D0 /* PeopleHeaderSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F328B2015F004001933D0 /* PeopleHeaderSection.swift */; };
+		7B1F328E2015F004001933D0 /* PeopleHeaderSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B1F328C2015F004001933D0 /* PeopleHeaderSection.xib */; };
 		7BE85DC22014BDC200B73846 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE85DC12014BDC200B73846 /* AppDelegate.swift */; };
 		7BE85DC72014BDC200B73846 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BE85DC52014BDC200B73846 /* Main.storyboard */; };
 		7BE85DC92014BDC200B73846 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BE85DC82014BDC200B73846 /* Assets.xcassets */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B1F328B2015F004001933D0 /* PeopleHeaderSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleHeaderSection.swift; sourceTree = "<group>"; };
+		7B1F328C2015F004001933D0 /* PeopleHeaderSection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PeopleHeaderSection.xib; sourceTree = "<group>"; };
 		7BE85DBE2014BDC200B73846 /* GiniAppsAdaptation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiniAppsAdaptation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE85DC12014BDC200B73846 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BE85DC62014BDC200B73846 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 				7BE85DC52014BDC200B73846 /* Main.storyboard */,
 				7BE85DF22014BE5000B73846 /* PeopleTableViewCell.swift */,
 				7BE85DF32014BE5000B73846 /* PeopleTableViewCell.xib */,
+				7B1F328B2015F004001933D0 /* PeopleHeaderSection.swift */,
+				7B1F328C2015F004001933D0 /* PeopleHeaderSection.xib */,
 				7BE85DEF2014BDED00B73846 /* Supporting Files */,
 				7BE85DC82014BDC200B73846 /* Assets.xcassets */,
 				7BE85DCD2014BDC200B73846 /* Info.plist */,
@@ -273,6 +279,7 @@
 			files = (
 				7BE85DF52014BE5000B73846 /* PeopleTableViewCell.xib in Resources */,
 				7BE85DCC2014BDC200B73846 /* LaunchScreen.storyboard in Resources */,
+				7B1F328E2015F004001933D0 /* PeopleHeaderSection.xib in Resources */,
 				7BE85DC92014BDC200B73846 /* Assets.xcassets in Resources */,
 				7BE85DC72014BDC200B73846 /* Main.storyboard in Resources */,
 			);
@@ -303,6 +310,7 @@
 				7BE85DF82014BE9E00B73846 /* People.swift in Sources */,
 				7BE85DFD2014C10300B73846 /* HTTPRequest.swift in Sources */,
 				7BE85DC22014BDC200B73846 /* AppDelegate.swift in Sources */,
+				7B1F328D2015F004001933D0 /* PeopleHeaderSection.swift in Sources */,
 				7BE85DF42014BE5000B73846 /* PeopleTableViewCell.swift in Sources */,
 				7BE85DFF2014DAA000B73846 /* PeopleViewController.swift in Sources */,
 			);
