@@ -8,14 +8,14 @@
 
 import UIKit
 
-struct People: Decodable {
+class People: Decodable {
     let name: String?
     let height: String?
     let gender: String?
-    let films: [String]?
+    var films: [String]?
 }
 
-struct Result: Decodable {
+class Result: Decodable {
     let results: [People]?
     let count: Int?
 }
