@@ -17,6 +17,10 @@ class HTTPRequest {
         self.url = url
     }
     
+    init(url: URL) {
+        self.url = url
+    }
+    
     func fetchResult(completion: @escaping (_ data: Data?, _ error: Error?)->Void) {
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in

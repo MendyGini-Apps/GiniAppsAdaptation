@@ -24,8 +24,8 @@ class PersonViewController: UIViewController {
     }
     static let cellId = "CellId"
     
-    var people: People!
-    var films: [Film?]!
+    private var people: People!
+    private var films: [Film?]!
     
     @IBOutlet weak var portraitImageView: UIImageView!
     @IBOutlet weak var heightLabel: UILabel!
@@ -38,17 +38,21 @@ class PersonViewController: UIViewController {
         }
     }
     
+    @IBAction func handleCancel() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureView()
         
         if let urls = people.filmsStr?.urls {
-            _ = DownloadManager(urls: urls, delegate: self)
+            _ = DownloadManager<Film>(urls: urls, delegate: self)
         }
     }
     
-    func configureView() {
+    private func configureView() {
         tableView.register(UINib(nibName: FilmCell.nibName, bundle: nil), forCellReuseIdentifier: PersonViewController.cellId)
         
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -62,10 +66,6 @@ class PersonViewController: UIViewController {
         heightLabel.text = people.height?.appending(" cm")
         massLabel.text = people.mass?.appending(" kg")
         genderLabel.text = people.gender
-    }
-    
-    @IBAction func handleCancel() {
-        dismiss(animated: true, completion: nil)
     }
 
 }
@@ -85,13 +85,16 @@ extension PersonViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension PersonViewController: DownloadManagerDelegate {
-    func downloadManager(_ manager: DownloadManager, FilmForIndex film: Film, atIndex index: Int) {
-        self.films[index] = film
-        let indexPath = IndexPath(row: index, section: 0)
-        if let visibleRows = tableView.indexPathsForVisibleRows,
-            visibleRows.contains(indexPath) {
-            
-            tableView.reloadRows(at: [indexPath], with: .fade)
+    func downloadFinished<T>(object: T, at index: Int) where T : Decodable {
+        if let film = object as? Film {
+            self.films[index] = film
+            let indexPath = IndexPath(row: index, section: 0)
+            if let visibleRows = tableView.indexPathsForVisibleRows,
+                visibleRows.contains(indexPath) {
+                tableView.beginUpdates()
+                tableView.reloadRows(at: [indexPath], with: .fade)
+                tableView.endUpdates()
+            }
         }
     }
 }

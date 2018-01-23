@@ -9,9 +9,28 @@
 import Foundation
 
 class FilmRequest {
-    let url: String
     
-    init(url: String) {
-        self.url = url
+    class func getFilm(withUrl url: URL, completion: @escaping (Film?,Error?)->()) {
+        HTTPRequest(url: url).fetchResult { (data, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            
+            guard let data = data else {
+                return
+            }
+            
+            do {
+                let film = try JSONDecoder().decode(Film.self, from: data)
+                completion(film, nil)
+            } catch let err {
+                completion(nil, err)
+            }
+            
+            
+            
+        }
     }
+    
 }

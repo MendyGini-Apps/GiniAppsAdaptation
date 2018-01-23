@@ -8,15 +8,16 @@
 
 import Foundation
 
-protocol DownloadManagerDelegate: class {
-    func downloadManager(_ manager: DownloadManager, FilmForIndex film: Film, atIndex index: Int)
+protocol DownloadManagerDelegate {
+    func downloadFinished<T: Decodable>(object: T, at index: Int)
 }
 
 
-class DownloadManager {
-    private let urls: [URL]
+class DownloadManager<T: Decodable> {
     
-    private weak var delegate: DownloadManagerDelegate!
+    let urls: [URL]
+
+    let delegate: DownloadManagerDelegate
     
     init(urls: [URL], delegate: DownloadManagerDelegate) {
         self.urls = urls
@@ -28,12 +29,12 @@ class DownloadManager {
         for url in urls {
             URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
                 if let data = data {
-                    if let film = try? JSONDecoder().decode(Film.self, from: data) {
+                    if let decodedObject = try? JSONDecoder().decode(T.self, from: data) {
                         DispatchQueue.main.async {
                             
                             if let requestedUrl = response?.url,
                                 let index = self.urls.index(of: requestedUrl) {
-                                self.delegate.downloadManager(self, FilmForIndex: film, atIndex: index)
+                                self.delegate.downloadFinished(object: decodedObject, at: index)
                             }
                         }
                     }
@@ -43,3 +44,6 @@ class DownloadManager {
         
     }
 }
+
+
+

@@ -14,6 +14,8 @@
 		7B409538201734B900FAB691 /* FilmRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B409537201734B900FAB691 /* FilmRequest.swift */; };
 		7B40953A2017539000FAB691 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4095392017539000FAB691 /* DownloadManager.swift */; };
 		7B40953D201753D900FAB691 /* Array+urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B40953C201753D900FAB691 /* Array+urls.swift */; };
+		7B40954120176CA800FAB691 /* FilmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B40954020176CA800FAB691 /* FilmViewController.swift */; };
+		7B40954320177B9F00FAB691 /* UIViewController+showErrorMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B40954220177B9F00FAB691 /* UIViewController+showErrorMsg.swift */; };
 		7B415A192016133F0065001D /* PeopleHeaderSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B415A182016133F0065001D /* PeopleHeaderSection.xib */; };
 		7B415A1B20163B1D0065001D /* PersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B415A1A20163B1D0065001D /* PersonViewController.swift */; };
 		7BE85DC22014BDC200B73846 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE85DC12014BDC200B73846 /* AppDelegate.swift */; };
@@ -55,6 +57,8 @@
 		7B409537201734B900FAB691 /* FilmRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmRequest.swift; sourceTree = "<group>"; };
 		7B4095392017539000FAB691 /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		7B40953C201753D900FAB691 /* Array+urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+urls.swift"; sourceTree = "<group>"; };
+		7B40954020176CA800FAB691 /* FilmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmViewController.swift; sourceTree = "<group>"; };
+		7B40954220177B9F00FAB691 /* UIViewController+showErrorMsg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+showErrorMsg.swift"; sourceTree = "<group>"; };
 		7B415A182016133F0065001D /* PeopleHeaderSection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PeopleHeaderSection.xib; sourceTree = "<group>"; };
 		7B415A1A20163B1D0065001D /* PersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewController.swift; sourceTree = "<group>"; };
 		7BE85DBE2014BDC200B73846 /* GiniAppsAdaptation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiniAppsAdaptation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,8 +110,32 @@
 			isa = PBXGroup;
 			children = (
 				7B40953C201753D900FAB691 /* Array+urls.swift */,
+				7B40954220177B9F00FAB691 /* UIViewController+showErrorMsg.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		7B40953E20176B6200FAB691 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7BE85DFE2014DAA000B73846 /* PeopleViewController.swift */,
+				7B415A1A20163B1D0065001D /* PersonViewController.swift */,
+				7B40954020176CA800FAB691 /* FilmViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		7B40953F20176B7F00FAB691 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7BE85DF22014BE5000B73846 /* FilmTableViewCell.swift */,
+				7BE85DF32014BE5000B73846 /* FilmTableViewCell.xib */,
+				7B1F328B2015F004001933D0 /* PeopleHeaderSection.swift */,
+				7B415A182016133F0065001D /* PeopleHeaderSection.xib */,
+				7B40953120172FCF00FAB691 /* FilmCell.swift */,
+				7B40953220172FCF00FAB691 /* FilmCell.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		7BE85DB52014BDC100B73846 = {
@@ -134,17 +162,11 @@
 			isa = PBXGroup;
 			children = (
 				7B40953B201753BB00FAB691 /* Extension */,
-				7BE85DF62014BE8900B73846 /* Model */,
 				7BE85DF92014C09B00B73846 /* Services */,
-				7BE85DFE2014DAA000B73846 /* PeopleViewController.swift */,
-				7B415A1A20163B1D0065001D /* PersonViewController.swift */,
+				7BE85DF62014BE8900B73846 /* Model */,
+				7B40953F20176B7F00FAB691 /* Views */,
+				7B40953E20176B6200FAB691 /* Controllers */,
 				7BE85DC52014BDC200B73846 /* Main.storyboard */,
-				7BE85DF22014BE5000B73846 /* FilmTableViewCell.swift */,
-				7BE85DF32014BE5000B73846 /* FilmTableViewCell.xib */,
-				7B1F328B2015F004001933D0 /* PeopleHeaderSection.swift */,
-				7B415A182016133F0065001D /* PeopleHeaderSection.xib */,
-				7B40953120172FCF00FAB691 /* FilmCell.swift */,
-				7B40953220172FCF00FAB691 /* FilmCell.xib */,
 				7BE85DEF2014BDED00B73846 /* Supporting Files */,
 				7BE85DC82014BDC200B73846 /* Assets.xcassets */,
 				7BE85DCD2014BDC200B73846 /* Info.plist */,
@@ -344,8 +366,10 @@
 				7BE85DFD2014C10300B73846 /* HTTPRequest.swift in Sources */,
 				7B415A1B20163B1D0065001D /* PersonViewController.swift in Sources */,
 				7B4095362017302400FAB691 /* Film.swift in Sources */,
+				7B40954320177B9F00FAB691 /* UIViewController+showErrorMsg.swift in Sources */,
 				7B40953A2017539000FAB691 /* DownloadManager.swift in Sources */,
 				7BE85DC22014BDC200B73846 /* AppDelegate.swift in Sources */,
+				7B40954120176CA800FAB691 /* FilmViewController.swift in Sources */,
 				7B1F328D2015F004001933D0 /* PeopleHeaderSection.swift in Sources */,
 				7BE85DF42014BE5000B73846 /* FilmTableViewCell.swift in Sources */,
 				7BE85DFF2014DAA000B73846 /* PeopleViewController.swift in Sources */,

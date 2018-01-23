@@ -77,13 +77,6 @@ class PeopleViewController: UIViewController {
             }
         }
     }
-
-    func showErrorMsg(title: String, msg: String) {
-        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
-    }
     
 }
 
@@ -126,14 +119,24 @@ extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
         return header
     }
     
-    @objc func handlePresentPerson(_ gesture: UIGestureRecognizer) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        guard let filmStr = sections[indexPath.section].people.filmsStr?[indexPath.row] else { return }
+        
+        let nextVC = FilmViewController.instantiateFilmVC(withFilmUrlStr: filmStr)
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc
+    private func handlePresentPerson(_ gesture: UIGestureRecognizer) {
         if let section = gesture.view?.tag {
             let nextVC = PersonViewController.instantiatePersonVC(withPerson: sections[section].people)
             present(nextVC, animated: true)
         }
     }
     
-    @objc func handleExpandClose(_ button: UIButton) {
+    @objc
+    private func handleExpandClose(_ button: UIButton) {
         let section = button.tag
         
         guard let films = people[section].filmsStr else {
@@ -158,9 +161,7 @@ extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             tableView.deleteRows(at: indexPaths, with: .fade)
         }
-        
         tableView.endUpdates()
-        
         
     }
     

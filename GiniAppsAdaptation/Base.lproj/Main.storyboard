@@ -170,7 +170,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3pX-Ek-rwo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2247" y="34"/>
+            <point key="canvasLocation" x="2881" y="34"/>
+        </scene>
+        <!--Actors-->
+        <scene sceneID="JJd-bB-IT4">
+            <objects>
+                <viewController storyboardIdentifier="FilmViewController" title="Actors" id="JwB-nZ-SJ6" customClass="FilmViewController" customModule="GiniAppsAdaptation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TCl-ni-0HI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F8r-3g-NIJ">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="pLW-uo-Yar">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="F8r-3g-NIJ" firstAttribute="leading" secondItem="vCo-ar-tbS" secondAttribute="leading" id="BK7-tC-WtP"/>
+                            <constraint firstItem="vCo-ar-tbS" firstAttribute="trailing" secondItem="F8r-3g-NIJ" secondAttribute="trailing" id="is5-A8-4k0"/>
+                            <constraint firstItem="F8r-3g-NIJ" firstAttribute="top" secondItem="vCo-ar-tbS" secondAttribute="top" id="jD1-09-n6M"/>
+                            <constraint firstItem="vCo-ar-tbS" firstAttribute="bottom" secondItem="F8r-3g-NIJ" secondAttribute="bottom" id="yIE-9K-G8h"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vCo-ar-tbS"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="F8r-3g-NIJ" id="YcY-F4-uQv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lqi-QI-ZfA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1550" y="736"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Irg-6e-fvG">
@@ -188,7 +223,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VtE-Sj-Q9n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1569" y="34"/>
+            <point key="canvasLocation" x="2177" y="34"/>
         </scene>
     </scenes>
 </document>
