@@ -99,13 +99,13 @@ extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
         if sections[section].isCollapse {
             return 0
         }
-        return sections[section].people.films?.count ?? 0
+        return sections[section].people.filmsStr?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PeopleViewController.cellId, for: indexPath) as! FilmTableViewCell
-        if let film = sections[indexPath.section].people.films?[indexPath.row] {
-            cell.configure(withTitle: film)
+        if let filmStr = sections[indexPath.section].people.filmsStr?[indexPath.row] {
+            cell.configure(withTitle: filmStr)
         }
         return cell
     }
@@ -136,7 +136,7 @@ extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
     @objc func handleExpandClose(_ button: UIButton) {
         let section = button.tag
         
-        guard let films = people[section].films else {
+        guard let films = people[section].filmsStr else {
             return
         }
         

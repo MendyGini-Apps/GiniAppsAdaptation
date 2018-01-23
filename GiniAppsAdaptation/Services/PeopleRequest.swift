@@ -23,7 +23,7 @@ class PeopleRequest {
             }
             guard let data = data else { return }
             do {
-                let api = try JSONDecoder().decode(Result.self, from: data)
+                let api = try JSONDecoder().decode(PeopleResult.self, from: data)
                 completion(api.results, nil)
             } catch let err {
                 completion(nil, err)

@@ -8,14 +8,23 @@
 
 import UIKit
 
-class People: Decodable {
+struct People: Codable {
     let name: String?
     let height: String?
     let gender: String?
-    var films: [String]?
+    let mass: String?
+    let filmsStr: [String]?
+    
+    private enum CodingKeys: String, CodingKey {
+        case name
+        case height
+        case gender
+        case mass
+        case filmsStr = "films"
+    }
 }
 
-class Result: Decodable {
+struct PeopleResult: Codable {
     let results: [People]?
     let count: Int?
 }

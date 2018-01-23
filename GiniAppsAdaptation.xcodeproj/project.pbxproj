@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		7B1F328D2015F004001933D0 /* PeopleHeaderSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1F328B2015F004001933D0 /* PeopleHeaderSection.swift */; };
+		7B40953320172FCF00FAB691 /* FilmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B40953120172FCF00FAB691 /* FilmCell.swift */; };
+		7B40953420172FCF00FAB691 /* FilmCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B40953220172FCF00FAB691 /* FilmCell.xib */; };
+		7B4095362017302400FAB691 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4095352017302400FAB691 /* Film.swift */; };
+		7B409538201734B900FAB691 /* FilmRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B409537201734B900FAB691 /* FilmRequest.swift */; };
+		7B40953A2017539000FAB691 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4095392017539000FAB691 /* DownloadManager.swift */; };
+		7B40953D201753D900FAB691 /* Array+urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B40953C201753D900FAB691 /* Array+urls.swift */; };
 		7B415A192016133F0065001D /* PeopleHeaderSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B415A182016133F0065001D /* PeopleHeaderSection.xib */; };
 		7B415A1B20163B1D0065001D /* PersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B415A1A20163B1D0065001D /* PersonViewController.swift */; };
 		7BE85DC22014BDC200B73846 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE85DC12014BDC200B73846 /* AppDelegate.swift */; };
@@ -43,6 +49,12 @@
 
 /* Begin PBXFileReference section */
 		7B1F328B2015F004001933D0 /* PeopleHeaderSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleHeaderSection.swift; sourceTree = "<group>"; };
+		7B40953120172FCF00FAB691 /* FilmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCell.swift; sourceTree = "<group>"; };
+		7B40953220172FCF00FAB691 /* FilmCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilmCell.xib; sourceTree = "<group>"; };
+		7B4095352017302400FAB691 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
+		7B409537201734B900FAB691 /* FilmRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmRequest.swift; sourceTree = "<group>"; };
+		7B4095392017539000FAB691 /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		7B40953C201753D900FAB691 /* Array+urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+urls.swift"; sourceTree = "<group>"; };
 		7B415A182016133F0065001D /* PeopleHeaderSection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PeopleHeaderSection.xib; sourceTree = "<group>"; };
 		7B415A1A20163B1D0065001D /* PersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewController.swift; sourceTree = "<group>"; };
 		7BE85DBE2014BDC200B73846 /* GiniAppsAdaptation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiniAppsAdaptation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +102,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B40953B201753BB00FAB691 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7B40953C201753D900FAB691 /* Array+urls.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		7BE85DB52014BDC100B73846 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +133,7 @@
 		7BE85DC02014BDC200B73846 /* GiniAppsAdaptation */ = {
 			isa = PBXGroup;
 			children = (
+				7B40953B201753BB00FAB691 /* Extension */,
 				7BE85DF62014BE8900B73846 /* Model */,
 				7BE85DF92014C09B00B73846 /* Services */,
 				7BE85DFE2014DAA000B73846 /* PeopleViewController.swift */,
@@ -122,6 +143,8 @@
 				7BE85DF32014BE5000B73846 /* FilmTableViewCell.xib */,
 				7B1F328B2015F004001933D0 /* PeopleHeaderSection.swift */,
 				7B415A182016133F0065001D /* PeopleHeaderSection.xib */,
+				7B40953120172FCF00FAB691 /* FilmCell.swift */,
+				7B40953220172FCF00FAB691 /* FilmCell.xib */,
 				7BE85DEF2014BDED00B73846 /* Supporting Files */,
 				7BE85DC82014BDC200B73846 /* Assets.xcassets */,
 				7BE85DCD2014BDC200B73846 /* Info.plist */,
@@ -160,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				7BE85DF72014BE9E00B73846 /* People.swift */,
+				7B4095352017302400FAB691 /* Film.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -168,7 +192,9 @@
 			isa = PBXGroup;
 			children = (
 				7BE85DFA2014C0B900B73846 /* PeopleRequest.swift */,
+				7B409537201734B900FAB691 /* FilmRequest.swift */,
 				7BE85DFC2014C10300B73846 /* HTTPRequest.swift */,
+				7B4095392017539000FAB691 /* DownloadManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -281,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BE85DF52014BE5000B73846 /* FilmTableViewCell.xib in Resources */,
+				7B40953420172FCF00FAB691 /* FilmCell.xib in Resources */,
 				7BE85DCC2014BDC200B73846 /* LaunchScreen.storyboard in Resources */,
 				7B415A192016133F0065001D /* PeopleHeaderSection.xib in Resources */,
 				7BE85DC92014BDC200B73846 /* Assets.xcassets in Resources */,
@@ -309,10 +336,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B40953320172FCF00FAB691 /* FilmCell.swift in Sources */,
+				7B40953D201753D900FAB691 /* Array+urls.swift in Sources */,
 				7BE85DFB2014C0B900B73846 /* PeopleRequest.swift in Sources */,
 				7BE85DF82014BE9E00B73846 /* People.swift in Sources */,
+				7B409538201734B900FAB691 /* FilmRequest.swift in Sources */,
 				7BE85DFD2014C10300B73846 /* HTTPRequest.swift in Sources */,
 				7B415A1B20163B1D0065001D /* PersonViewController.swift in Sources */,
+				7B4095362017302400FAB691 /* Film.swift in Sources */,
+				7B40953A2017539000FAB691 /* DownloadManager.swift in Sources */,
 				7BE85DC22014BDC200B73846 /* AppDelegate.swift in Sources */,
 				7B1F328D2015F004001933D0 /* PeopleHeaderSection.swift in Sources */,
 				7BE85DF42014BE5000B73846 /* FilmTableViewCell.swift in Sources */,
