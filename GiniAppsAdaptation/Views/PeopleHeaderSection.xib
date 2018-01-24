@@ -121,7 +121,6 @@
                             </subviews>
                         </stackView>
                     </subviews>
-                    <viewLayoutGuide key="safeArea" id="Z5p-d8-I0P"/>
                 </stackView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pvB-NZ-MHW">
                     <rect key="frame" x="8" y="8" width="80" height="80"/>

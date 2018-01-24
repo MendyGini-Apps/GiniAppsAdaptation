@@ -8,20 +8,21 @@
 
 import Foundation
 
-protocol DownloadManagerDelegate {
-    func downloadFinished<T: Decodable>(object: T, at index: Int)
+protocol DownloadManagerDelegate: class {
+    func downloadFinished<T: Decodable>(object: T, at index: Int, userInfo: [String:Any]?)
 }
 
 
 class DownloadManager<T: Decodable> {
     
     let urls: [URL]
-
-    let delegate: DownloadManagerDelegate
+    let userInfo: [String:Any]?
+    weak var delegate: DownloadManagerDelegate!
     
-    init(urls: [URL], delegate: DownloadManagerDelegate) {
+    init(urls: [URL], delegate: DownloadManagerDelegate, userInfo: [String:Any]? = nil) {
         self.urls = urls
         self.delegate = delegate
+        self.userInfo = userInfo
         fetchResult()
     }
     
@@ -34,7 +35,7 @@ class DownloadManager<T: Decodable> {
                             
                             if let requestedUrl = response?.url,
                                 let index = self.urls.index(of: requestedUrl) {
-                                self.delegate.downloadFinished(object: decodedObject, at: index)
+                                self.delegate.downloadFinished(object: decodedObject, at: index, userInfo: self.userInfo)
                             }
                         }
                     }

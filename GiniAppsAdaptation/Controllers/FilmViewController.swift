@@ -33,17 +33,21 @@ class FilmViewController: UIViewController {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
+            
+            tableView.register(UINib(nibName: ActorCell.nibName, bundle: nil), forCellReuseIdentifier: FilmViewController.cellId)
+            tableView.rowHeight = UITableViewAutomaticDimension
+            tableView.estimatedRowHeight = 140
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: FilmViewController.cellId)
-        
+        getPeople()
+    }
+    
+    func getPeople() {
         if let url = URL(string: filmUrlStr) {
             FilmRequest.getFilm(withUrl: url, completion: { (film, error) in
-                
                 if let error = error {
                     DispatchQueue.main.async {
                         self.showErrorMsg(title: "Error", msg: error.localizedDescription)
@@ -58,14 +62,16 @@ class FilmViewController: UIViewController {
                 }
                 DispatchQueue.main.async {
                     self.people = [People?](repeating: nil, count:urls.count)
+                    if let title = film?.title {
+                        self.navigationItem.title = "Actor of \(title)"
+                    } else {
+                        self.navigationItem.title = "Actor"
+                    }
+                    
                 }
-                
                 _ = DownloadManager<People>(urls: urls, delegate: self)
-                
             })
         }
-        
-        
     }
 }
 
@@ -75,15 +81,18 @@ extension FilmViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FilmViewController.cellId, for: indexPath)
-        cell.textLabel?.text = people[indexPath.row]?.name
+        let cell = tableView.dequeueReusableCell(withIdentifier: FilmViewController.cellId, for: indexPath) as! ActorCell
+        
+        let actor = people[indexPath.row]
+        cell.configure(withName: actor?.name, gender: actor?.gender, height: actor?.height)
+        
         return cell
     }
 }
 
 extension FilmViewController: DownloadManagerDelegate {
     
-    func downloadFinished<T>(object: T, at index: Int) where T : Decodable {
+    func downloadFinished<T>(object: T, at index: Int, userInfo: [String : Any]?) where T : Decodable {
         if let people = object as? People {
             let indexPath = IndexPath(row: index, section: 0)
             

@@ -31,12 +31,14 @@ class PeopleViewController: UIViewController {
     }
     
     var people: [People] = []
+    var filmDict: [IndexPath:Film] = [:]
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
             tableView.isHidden = true
+
         }
     }
     
@@ -53,7 +55,6 @@ class PeopleViewController: UIViewController {
         
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionHeaderHeight = 140
-        
         getPeople()
     }
     
@@ -74,6 +75,7 @@ class PeopleViewController: UIViewController {
                     self.sections.append(Section(people: person))
                 }
                 self.people = people
+                
             }
         }
     }
@@ -97,9 +99,13 @@ extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PeopleViewController.cellId, for: indexPath) as! FilmTableViewCell
-        if let filmStr = sections[indexPath.section].people.filmsStr?[indexPath.row] {
-            cell.configure(withTitle: filmStr)
-        }
+//        if let filmStr = sections[indexPath.section].people.filmsStr?[indexPath.row] {
+//            cell.configure(withTitle: filmStr)
+//        }
+        cell.configure(whiteFilm: filmDict[indexPath])
+//        let film = filmDict[indexPath]
+//        cell.configure(withTitle: film)
+        
         return cell
     }
     
@@ -158,6 +164,12 @@ extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.beginUpdates()
         if isCollapse {
             tableView.insertRows(at: indexPaths, with: .fade)
+            if !filmDictContains(indexPaths: indexPaths) {
+                if let urls = films.urls {
+                    _ = DownloadManager<Film>(urls: urls, delegate: self, userInfo: ["section":section])
+                }
+            }
+            
         } else {
             tableView.deleteRows(at: indexPaths, with: .fade)
         }
@@ -165,8 +177,30 @@ extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
     
+    private func filmDictContains(indexPaths: [IndexPath]) -> Bool {
+        for indexPath in indexPaths {
+            if filmDict[indexPath] == nil {
+                return false
+            }
+        }
+        return true
+    }
+    
 }
 
+extension PeopleViewController: DownloadManagerDelegate {
+    func downloadFinished<T>(object: T, at index: Int, userInfo: [String : Any]?) where T : Decodable {
+        if let film = object as? Film, let section = userInfo?["section"] as? Int {
+            let indexPath = IndexPath(row: index, section: section)
+            filmDict[indexPath] = film
+            if let indexPathsVisible = tableView.indexPathsForVisibleRows, indexPathsVisible.contains(indexPath) {
+                tableView.beginUpdates()
+                tableView.reloadRows(at: [indexPath], with: .fade)
+                tableView.endUpdates()
+            }
+        }
+    }
+}
 
 
 

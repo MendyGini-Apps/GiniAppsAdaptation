@@ -49,25 +49,7 @@ class PeopleHeaderSection: UITableViewHeaderFooterView {
         
         isCollapse = section.isCollapse
         
-        if let name = section.people.name,
-            let image = UIImage(named: name) {
-            portraitImageView.image = image
-        } else {
-            portraitImageView.image = nil
-        }
-    }
-    
-    func configure(withName name: String?, gender: String?, height: String?) {
-        nameLabel.text = name
-        genderLabel.text = gender
-        heightLabel.text = height
-
-        if let name = name,
-            let image = UIImage(named: name) {
-            portraitImageView.image = image
-        } else {
-            portraitImageView.image = nil
-        }
+        portraitImageView.image = UIImage(named: section.people.name ?? "") ?? #imageLiteral(resourceName: "noImage")
     }
     
 }

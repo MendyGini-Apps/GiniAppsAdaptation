@@ -13,9 +13,17 @@ class FilmTableViewCell: UITableViewCell {
     static let nibName = "FilmTableViewCell"
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
-    func configure(withTitle title: String?) {
-        titleLabel.text = title
+    func configure(whiteFilm film: Film?) {
+        if let film = film {
+            titleLabel.isHidden = false
+            indicator.stopAnimating()
+            titleLabel.text = film.title
+        } else {
+            titleLabel.isHidden = true
+            indicator.isHidden = false
+        }
     }
     
 }

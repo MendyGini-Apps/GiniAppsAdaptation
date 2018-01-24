@@ -53,7 +53,7 @@ class PersonViewController: UIViewController {
     }
     
     private func configureView() {
-        tableView.register(UINib(nibName: FilmCell.nibName, bundle: nil), forCellReuseIdentifier: PersonViewController.cellId)
+        tableView.register(UINib(nibName: DetailsFilmCell.nibName, bundle: nil), forCellReuseIdentifier: PersonViewController.cellId)
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 400
@@ -76,7 +76,7 @@ extension PersonViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PersonViewController.cellId, for: indexPath) as! FilmCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: PersonViewController.cellId, for: indexPath) as! DetailsFilmCell
         
         cell.configure(with: films[indexPath.row], isReady: films[indexPath.row] != nil)
         
@@ -85,7 +85,7 @@ extension PersonViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension PersonViewController: DownloadManagerDelegate {
-    func downloadFinished<T>(object: T, at index: Int) where T : Decodable {
+    func downloadFinished<T>(object: T, at index: Int, userInfo: [String : Any]?) where T : Decodable {
         if let film = object as? Film {
             self.films[index] = film
             let indexPath = IndexPath(row: index, section: 0)

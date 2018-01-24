@@ -8,9 +8,9 @@
 
 import UIKit
 
-class FilmCell: UITableViewCell {
+class DetailsFilmCell: UITableViewCell {
 
-    static let nibName = "FilmCell"
+    static let nibName = "DetailsFilmCell"
     
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     

@@ -25,16 +25,29 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sVz-NM-Md1">
+                        <rect key="frame" x="153" y="73.5" width="37" height="37"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="5zG-rg-4p9"/>
+                            <constraint firstAttribute="width" constant="37" id="Nh8-s9-l9K"/>
+                        </constraints>
+                        <color key="color" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="sVz-NM-Md1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" id="6b3-et-wFa"/>
+                    <constraint firstItem="sVz-NM-Md1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Ttj-OY-ybh"/>
                     <constraint firstAttribute="trailing" secondItem="gg1-5d-2c8" secondAttribute="trailing" id="W3D-qT-GTp"/>
                     <constraint firstAttribute="bottom" secondItem="gg1-5d-2c8" secondAttribute="bottom" id="am9-OX-BJr"/>
+                    <constraint firstItem="sVz-NM-Md1" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="bbB-YQ-7fK"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="sVz-NM-Md1" secondAttribute="bottom" id="rBA-yw-brx"/>
                     <constraint firstItem="gg1-5d-2c8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ur1-zV-0az"/>
                     <constraint firstItem="gg1-5d-2c8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="vPB-DO-I0L"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="indicator" destination="sVz-NM-Md1" id="DHA-U7-gpt"/>
                 <outlet property="titleLabel" destination="gg1-5d-2c8" id="pLt-7L-Pq8"/>
             </connections>
             <point key="canvasLocation" x="45" y="124"/>
