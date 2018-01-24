@@ -17,7 +17,7 @@ class DownloadManager<T: Decodable> {
     
     let urls: [URL]
     let userInfo: [String:Any]?
-    weak var delegate: DownloadManagerDelegate!
+    weak var delegate: DownloadManagerDelegate?
     
     init(urls: [URL], delegate: DownloadManagerDelegate, userInfo: [String:Any]? = nil) {
         self.urls = urls
@@ -35,7 +35,7 @@ class DownloadManager<T: Decodable> {
                             
                             if let requestedUrl = response?.url,
                                 let index = self.urls.index(of: requestedUrl) {
-                                self.delegate.downloadFinished(object: decodedObject, at: index, userInfo: self.userInfo)
+                                self.delegate?.downloadFinished(object: decodedObject, at: index, userInfo: self.userInfo)
                             }
                         }
                     }

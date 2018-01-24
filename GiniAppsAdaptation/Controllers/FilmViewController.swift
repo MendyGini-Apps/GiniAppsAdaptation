@@ -10,11 +10,12 @@ import UIKit
 
 class FilmViewController: UIViewController {
     
-    class func instantiateFilmVC(withFilmUrlStr filmUrlStr: String) -> UIViewController {
+    class func instantiateFilmVC(withFilm film: Film) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let filmVC = storyboard.instantiateViewController(withIdentifier: "FilmViewController") as! FilmViewController
-
-        filmVC.filmUrlStr = filmUrlStr
+        
+        filmVC.film = film
+        filmVC.people = [People?](repeating: nil, count:film.actors?.count ?? 0)
         
         return filmVC
     }
@@ -22,11 +23,9 @@ class FilmViewController: UIViewController {
     static let cellId = "CellId"
     
     private var filmUrlStr: String!
-    private var people: [People?]! {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    
+    private var film: Film!
+    private var people: [People?]!
     
 
     @IBOutlet weak var tableView: UITableView! {
@@ -42,36 +41,24 @@ class FilmViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getPeople()
+        
+        navigationItem.title = "actors"
+        
+        if let title = film.title {
+            navigationItem.prompt = "\(title)"
+        }
+        
+        getActorsFromFilm()
     }
     
-    func getPeople() {
-        if let url = URL(string: filmUrlStr) {
-            FilmRequest.getFilm(withUrl: url, completion: { (film, error) in
-                if let error = error {
-                    DispatchQueue.main.async {
-                        self.showErrorMsg(title: "Error", msg: error.localizedDescription)
-                        return
-                    }
-                }
-                guard let urls = film?.actors?.urls else {
-                    DispatchQueue.main.async {
-                        self.showErrorMsg(title: "", msg: "data not received")
-                    }
-                    return
-                }
-                DispatchQueue.main.async {
-                    self.people = [People?](repeating: nil, count:urls.count)
-                    if let title = film?.title {
-                        self.navigationItem.title = "Actor of \(title)"
-                    } else {
-                        self.navigationItem.title = "Actor"
-                    }
-                    
-                }
-                _ = DownloadManager<People>(urls: urls, delegate: self)
-            })
+    func getActorsFromFilm() {
+
+        guard let urls = film.actors?.urls else {
+            self.showErrorMsg(title: "", msg: "there are no actors")
+            return
         }
+        
+        _ = DownloadManager<People>(urls: urls, delegate: self)
     }
 }
 

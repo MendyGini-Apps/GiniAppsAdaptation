@@ -99,12 +99,8 @@ extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PeopleViewController.cellId, for: indexPath) as! FilmTableViewCell
-//        if let filmStr = sections[indexPath.section].people.filmsStr?[indexPath.row] {
-//            cell.configure(withTitle: filmStr)
-//        }
+
         cell.configure(whiteFilm: filmDict[indexPath])
-//        let film = filmDict[indexPath]
-//        cell.configure(withTitle: film)
         
         return cell
     }
@@ -126,10 +122,11 @@ extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        guard let filmStr = sections[indexPath.section].people.filmsStr?[indexPath.row] else { return }
         
-        let nextVC = FilmViewController.instantiateFilmVC(withFilmUrlStr: filmStr)
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let film = filmDict[indexPath] else { return }
+        let nextVC = FilmViewController.instantiateFilmVC(withFilm: film)
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
