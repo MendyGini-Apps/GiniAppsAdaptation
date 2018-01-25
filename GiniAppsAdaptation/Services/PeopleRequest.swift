@@ -1,5 +1,5 @@
 //
-//  PeopleRequest.swift
+//  PersonRequest.swift
 //  GiniAppsAdaptation
 //
 //  Created by Menahem Barouk on 21/01/2018.

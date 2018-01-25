@@ -8,15 +8,7 @@
 
 import UIKit
 
-class Section {
-    var people: People
-    var isCollapse: Bool
-    
-    init(people: People) {
-        self.people = people
-        isCollapse = true
-    }
-}
+
 
 class PeopleViewController: UIViewController {
     
@@ -46,7 +38,6 @@ class PeopleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.register(UINib(nibName: FilmTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PeopleViewController.cellId)
         tableView.register(UINib(nibName: PeopleHeaderSection.nibName, bundle: nil), forHeaderFooterViewReuseIdentifier: PeopleViewController.headerId)
         
@@ -133,9 +124,27 @@ extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
     @objc
     private func handlePresentPerson(_ gesture: UIGestureRecognizer) {
         if let section = gesture.view?.tag {
-            let nextVC = PersonViewController.instantiatePersonVC(withPerson: sections[section].people)
+            let films = getFilmsBy(section: section)
+            let nextVC = PersonViewController.instantiatePersonVC(withPerson: sections[section].people, andFilms: films)
             present(nextVC, animated: true)
         }
+    }
+    
+    private func getFilmsBy(section: Int) -> [Film]? {
+        
+        guard let countFilms = sections[section].people.filmsStr?.count else {
+            return nil
+        }
+        
+        var films: [Film] = []
+        for row in 0..<countFilms {
+            if let film = filmDict[IndexPath(row: row, section: section)] {
+                films.append(film)
+            } else {
+                return nil
+            }
+        }
+        return films
     }
     
     @objc
@@ -192,7 +201,7 @@ extension PeopleViewController: DownloadManagerDelegate {
             filmDict[indexPath] = film
             if let indexPathsVisible = tableView.indexPathsForVisibleRows, indexPathsVisible.contains(indexPath) {
                 tableView.beginUpdates()
-                tableView.reloadRows(at: [indexPath], with: .fade)
+                tableView.reloadRows(at: [indexPath], with: .none)
                 tableView.endUpdates()
             }
         }

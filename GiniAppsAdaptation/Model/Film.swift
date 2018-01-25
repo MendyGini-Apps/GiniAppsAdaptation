@@ -13,13 +13,13 @@ struct Film: Decodable {
     let description: String?
     let director: String?
     let producer: String?
-    let actors: [String]?
+    let personsUrl: [String]?
     
     private enum CodingKeys: String, CodingKey {
         case title
         case director
         case producer
         case description = "opening_crawl"
-        case actors = "characters"
+        case personsUrl = "characters"
     }
 }

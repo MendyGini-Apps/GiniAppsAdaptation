@@ -27,10 +27,6 @@
                     </label>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sVz-NM-Md1">
                         <rect key="frame" x="153" y="73.5" width="37" height="37"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="37" id="5zG-rg-4p9"/>
-                            <constraint firstAttribute="width" constant="37" id="Nh8-s9-l9K"/>
-                        </constraints>
                         <color key="color" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </activityIndicatorView>
                 </subviews>

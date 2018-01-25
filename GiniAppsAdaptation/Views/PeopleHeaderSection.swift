@@ -8,7 +8,15 @@
 
 import UIKit
 
-
+class Section {
+    var people: People
+    var isCollapse: Bool
+    
+    init(people: People) {
+        self.people = people
+        isCollapse = true
+    }
+}
 
 class PeopleHeaderSection: UITableViewHeaderFooterView {
     

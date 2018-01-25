@@ -12,11 +12,10 @@ extension Array where Element == String {
 
     var urls: [URL]? {
         var urls = [URL]()
-        for str in self {
-            if let url = URL(string: str) {
+        
+        self.forEach{
+            if let url = URL(string: $0) {
                 urls.append(url)
-            } else {
-                return nil
             }
         }
         

@@ -15,19 +15,16 @@ class FilmViewController: UIViewController {
         let filmVC = storyboard.instantiateViewController(withIdentifier: "FilmViewController") as! FilmViewController
         
         filmVC.film = film
-        filmVC.people = [People?](repeating: nil, count:film.actors?.count ?? 0)
+        filmVC.people = [People?](repeating: nil, count:film.personsUrl?.count ?? 0)
         
         return filmVC
     }
     
     static let cellId = "CellId"
     
-    private var filmUrlStr: String!
-    
     private var film: Film!
     private var people: [People?]!
     
-
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
@@ -53,7 +50,7 @@ class FilmViewController: UIViewController {
     
     func getActorsFromFilm() {
 
-        guard let urls = film.actors?.urls else {
+        guard let urls = film.personsUrl?.urls else {
             self.showErrorMsg(title: "", msg: "there are no actors")
             return
         }

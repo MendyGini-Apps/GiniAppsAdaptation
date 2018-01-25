@@ -10,12 +10,14 @@ import UIKit
 
 class PersonViewController: UIViewController {
     
-    class func instantiatePersonVC(withPerson person: People) -> UINavigationController {
+    class func instantiatePersonVC(withPerson person: People, andFilms films: [Film]?) -> UINavigationController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let navVC = storyboard.instantiateViewController(withIdentifier: "PersonNavigationController") as! UINavigationController
         if let personVC = navVC.visibleViewController as? PersonViewController {
             personVC.people = person
-            if let filmsCount = person.filmsStr?.count {
+            if films != nil {
+                personVC.films = films
+            } else if let filmsCount = person.filmsStr?.count {
                 personVC.films = [Film?](repeating: nil, count:filmsCount)
             }
             
@@ -27,10 +29,17 @@ class PersonViewController: UIViewController {
     private var people: People!
     private var films: [Film?]!
     
+    
+    @IBOutlet weak var containerHeaderView: UIView!
     @IBOutlet weak var portraitImageView: UIImageView!
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var massLabel: UILabel!
+    @IBOutlet weak var bottomBaseContainerConstraint: NSLayoutConstraint!
+    @IBOutlet weak var heightBaseContainerConstraint: NSLayoutConstraint!
+    
+    
+    
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
@@ -47,7 +56,8 @@ class PersonViewController: UIViewController {
         
         configureView()
         
-        if let urls = people.filmsStr?.urls {
+        
+        if (films.first{$0 == nil}) != nil, let urls = people.filmsStr?.urls {
             _ = DownloadManager<Film>(urls: urls, delegate: self)
         }
     }
@@ -81,6 +91,13 @@ extension PersonViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configure(with: films[indexPath.row], isReady: films[indexPath.row] != nil)
         
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        containerHeaderView.clipsToBounds = offsetY >= 0
+        bottomBaseContainerConstraint.constant = offsetY <= 0 ? 0 : offsetY
+        heightBaseContainerConstraint.constant = max(-offsetY, scrollView.contentInset.top)
     }
 }
 
